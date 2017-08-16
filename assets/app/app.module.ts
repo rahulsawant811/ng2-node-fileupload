@@ -7,6 +7,8 @@ import { AppComponent } from "./app.component";
 import { routing } from "./app.routing";
 import { UploadComponent } from "./uploads/upload.component";
 
+import { FileuploadService } from "./services/fileupload.service";
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -18,7 +20,8 @@ import { UploadComponent } from "./uploads/upload.component";
         ReactiveFormsModule,
         HttpModule
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    providers: [FileuploadService]
 })
 export class AppModule {
 

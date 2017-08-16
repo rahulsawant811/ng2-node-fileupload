@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { FileuploadService } from '../services/fileupload.service';
 
 @Component({
     selector: 'my-upload',
@@ -17,7 +16,7 @@ import 'rxjs/add/operator/map';
 export class UploadComponent implements OnInit {
     product;
 
-    constructor(private http: Http) {}
+    constructor(private fileUpload: FileuploadService){}
 
     ngOnInit() {
     }
@@ -25,19 +24,19 @@ export class UploadComponent implements OnInit {
     filesToUpload: Array<File> = [];
 
     upload() {
-    const formData: any = new FormData();
-    const files: Array<File> = this.filesToUpload;
+        const formData: any = new FormData();
+        const files: Array<File> = this.filesToUpload;
 
-    formData.append("uploads[]", files[0], files[0]['name']);
+        formData.append("uploads[]", files[0], files[0]['name']);
 
-    this.http.post('http://localhost:3000/fileupload/upload', formData)
-      .map(files => files.json())
-      .subscribe(files => console.log('files', files))
+        this.fileUpload.uploadFile(formData)
+                       .subscribe(files => console.log('files', files));
+
     }
 
     fileChangeEvent(fileInput: any) {
-    this.filesToUpload = <Array<File>>fileInput.target.files;
-    //this.product.photo = fileInput.target.files[0]['name'];
+        this.filesToUpload = <Array<File>>fileInput.target.files;
+        //this.product.photo = fileInput.target.files[0]['name'];
     }
 
 }
