@@ -3,4 +3,4 @@
 - npm install
 - npm run build
 - npm start
-- http://localhost/3000
+- visit: http://localhost:3000
